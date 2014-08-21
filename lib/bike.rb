@@ -27,6 +27,6 @@ class Bike
   end
 
   def time!
-    @time = Time.now.round(0)
+    @time = Time.now
   end
 end
