@@ -35,7 +35,7 @@ describe Bike do
   context 'Time' do
     it 'can hold a time variable' do
       bike.time!
-      expect(bike.time.round(0).to eq Time.now.round(0) 
+      expect(bike.time.round(0)).to eq Time.now.round(0) 
     end
   end
 end

@@ -34,7 +34,7 @@ describe Person do
       expect(station).to receive(:return_bike)
       person.return_bike_to(station)
     end
-    it 'has no bike after returning' do
+    it 'has no bike after returning a bike' do
       allow(station).to receive(:return_bike).and_return(nil)
       person2.return_bike_to(station)
       expect(person2).not_to have_bike
