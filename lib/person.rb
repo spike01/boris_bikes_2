@@ -9,11 +9,11 @@ class Person
   end
   
   def get_bike_from(station)
-    @bike = station.release_bike
+    @bike = station.release
   end
   
   def return_bike_to(station)
-    @bike = station.return_bike
+    @bike = station.accept(@bike)
   end
 
   def fall_down

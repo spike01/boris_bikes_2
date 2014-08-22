@@ -12,18 +12,18 @@ describe Person do
       expect(person).to_not have_bike
     end
 
-    it 'can get a bike' do
+    it 'can initialize with a bike' do
       expect(person2).to have_bike
     end
   end
 
   context 'Getting bikes' do
     it 'can ask a station to release a bike' do
-     expect(station).to receive(:release_bike)
+     expect(station).to receive(:release)
      person.get_bike_from(station) 
     end
     it 'can get a bike after station releases bike' do
-      allow(station).to receive(:release_bike).and_return(:bike)
+      allow(station).to receive(:release).and_return(:bike)
       person.get_bike_from(station)
       expect(person).to have_bike
     end
@@ -31,11 +31,11 @@ describe Person do
 
   context 'Returning bikes' do
     it 'can ask a station to accept a bike' do
-      expect(station).to receive(:return_bike)
+      expect(station).to receive(:accept)
       person.return_bike_to(station)
     end
     it 'has no bike after returning a bike' do
-      allow(station).to receive(:return_bike).and_return(nil)
+      allow(station).to receive(:accept).and_return(nil)
       person2.return_bike_to(station)
       expect(person2).not_to have_bike
     end
