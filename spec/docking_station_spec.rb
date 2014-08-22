@@ -1,10 +1,11 @@
 require 'docking_station'
 
 describe DockingStation do
+  Bike = Class.new
 
   let(:old_st) { DockingStation.new(capacity: 20) }
   let(:liv_pool_st) { DockingStation.new(bikes: 10) }
-  let(:bike) { double :bike, class: Bike }
+  let(:bike) { double :bike, class: Bike, break!: bike }
   
   def break_some_bikes(container, number)
     container.bikes.take(number).each { |bike| bike.break! }
