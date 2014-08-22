@@ -13,12 +13,13 @@ class DockingStation
   end
 
   def accept(bike)
-    unless full? then @bikes << bike
-      else p "Sorry, at capacity"
-    end 
+    raise "Sorry, at capacity" if full?
+    raise "Sorry, this is not a bike" if bike.class != Bike 
+    @bikes << bike
   end
 
   def release
+    raise "Sorry, no bikes available" if empty?
     @bikes.pop
   end
 

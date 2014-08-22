@@ -4,7 +4,7 @@ describe DockingStation do
 
   let(:old_st) { DockingStation.new(capacity: 20) }
   let(:liv_pool_st) { DockingStation.new(bikes: 10) }
-  let(:bike) { double :bike }
+  let(:bike) { double :bike, class: Bike }
   
   def break_some_bikes(container, number)
     container.bikes.take(number).each { |bike| bike.break! }
@@ -24,20 +24,32 @@ describe DockingStation do
     it 'can initialize with a maximum capacity' do
      expect(old_st.capacity).to eq(20)
     end
+
     it 'can initialize with a default capacity' do
       moorgate = DockingStation.new
       expect(moorgate.capacity).to eq(30)
     end
+
     it 'knows when it is full' do
       fill_container(old_st)
       expect(old_st.full?).to be true
     end
+
     it 'knows when it is empty' do
       expect(old_st.empty?).to be true
     end
+    
     it 'doesn\'t accept a bike when it\'s full' do
       fill_container(old_st)
-      expect(old_st.accept(bike)).to eq("Sorry, at capacity")
+      expect{old_st.accept(bike)}.to raise_error("Sorry, at capacity")
+    end
+
+    it 'doesn\'t release a bike when it\'s full' do
+      expect{old_st.release}.to raise_error("Sorry, no bikes available")
+    end
+
+    it 'only accepts bikes' do
+      expect{old_st.accept(liv_pool_st)}.to raise_error("Sorry, this is not a bike")
     end
   end
 
