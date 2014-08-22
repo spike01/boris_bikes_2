@@ -13,7 +13,9 @@ class DockingStation
   end
 
   def accept(bike)
-    @bikes << bike
+    unless full? then @bikes << bike
+      else p "Sorry, at capacity"
+    end 
   end
 
   def release
@@ -30,5 +32,9 @@ class DockingStation
 
   def full?
     bikes.count == capacity
+  end
+
+  def empty?
+    bikes.empty? == true
   end
 end

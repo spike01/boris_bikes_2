@@ -32,6 +32,13 @@ describe DockingStation do
       fill_container(old_st)
       expect(old_st.full?).to be true
     end
+    it 'knows when it is empty' do
+      expect(old_st.empty?).to be true
+    end
+    it 'doesn\'t accept a bike when it\'s full' do
+      fill_container(old_st)
+      expect(old_st.accept(bike)).to eq("Sorry, at capacity")
+    end
   end
 
   context 'Docking and releasing' do
